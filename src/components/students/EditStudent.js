@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { TextField, Paper, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import axios from "axios";
 import {
   getStudent,
   clearStudent,
@@ -10,15 +11,17 @@ import {
 } from "../../redux/features/studentSlice";
 
 const EditStudent = () => {
-  const { handleSubmit, control, reset } = useForm({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: "",
-      phone: "",
-    },
-  });
+  const { handleSubmit, control, reset, register } = useForm(
+  //   {
+  //   defaultValues: {
+  //     firstName: "",
+  //     lastName: "",
+  //     email: "",
+  //     address: "",
+  //     phone: "",
+  //   },
+  // }
+  );
 
   const params = useParams();
   let history = useHistory();
@@ -36,6 +39,9 @@ const EditStudent = () => {
   }, [student]);
 
   const onSubmit = (data) => {
+
+    let response = axios.put(`http://127.0.0.1:5001/user/59`, data);
+    console.log(response)
     dispatch(updateStudent(data));
     history.push("/");
   };
@@ -54,7 +60,8 @@ const EditStudent = () => {
                 placeholder="Enter Your First Name"
                 fullWidth
                 margin="normal"
-                {...field}
+                // {...field}
+                {...register("firstName")}
               />
             )}
           />
@@ -70,7 +77,8 @@ const EditStudent = () => {
                 placeholder="Enter Your Last Name"
                 fullWidth
                 margin="normal"
-                {...field}
+                // {...field}
+                {...register("lastName")}
               />
             )}
           />
@@ -85,7 +93,7 @@ const EditStudent = () => {
                 placeholder="Enter Your E-mail Address"
                 fullWidth
                 margin="normal"
-                {...field}
+                {...register("email")}
               />
             )}
           />
@@ -100,7 +108,8 @@ const EditStudent = () => {
                 placeholder="Enter Your Address"
                 fullWidth
                 margin="normal"
-                {...field}
+                // {...field}
+                {...register("address")}
               />
             )}
           />
@@ -115,7 +124,8 @@ const EditStudent = () => {
                 placeholder="Enter Your Phone Number"
                 fullWidth
                 margin="normal"
-                {...field}
+                // {...field}
+                {...register("phone")}
               />
             )}
           />
