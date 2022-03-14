@@ -50,6 +50,7 @@ const movieSlice = createSlice({
             },
         }
 });
+// 
 
 export const {removeSelectedMovieOrShow} = movieSlice.actions;
 export const getAllMovies = (state)=> state.movies.movies;
